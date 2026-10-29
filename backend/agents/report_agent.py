@@ -10,8 +10,9 @@ def generate_final_report(
     repository_summary,
     intent_analysis,
     scope_analysis,
-    recovery_analysis
+    recovery_analysis,
 ):
+    """Unified report combining Intent, Scope Creep, and Recovery."""
     if os.getenv("USE_GEMINI_ANALYSIS", "false").lower() != "true":
         return (
             "Overall repository condition: Review recommended.\n\n"
@@ -19,15 +20,17 @@ def generate_final_report(
             f"Intent findings: {intent_analysis}\n\n"
             f"Scope findings: {scope_analysis}\n\n"
             f"Recovery findings: {recovery_analysis}\n\n"
-            "Next action: add automated tests and configure a valid Gemini key only "
-            "when AI-enhanced analysis is required."
+            "Next action: set USE_GEMINI_ANALYSIS=true with GEMINI_API_KEY "
+            "for a full online multi-agent report."
         )
 
     prompt = f"""
-You are the Final Decision Agent in an Agentic
-Code Archaeology system.
+You are the Final Report agent in an Agentic AI Framework with three core capabilities:
+1) Code Intent Analysis
+2) Scope Creep Detection
+3) Software Project Recovery
 
-Create one unified repository analysis report using:
+Combine the agent outputs into one clear report for a developer or project manager.
 
 Repository Summary:
 {repository_summary}
@@ -41,16 +44,17 @@ Scope Analysis:
 Recovery Analysis:
 {recovery_analysis}
 
-Return:
+Write a structured report with:
 
-1. Overall repository condition
-2. Main findings
-3. Important risks
-4. Recommended next action
-5. Final recommendation
+1. Overall repository condition (1–2 sentences)
+2. Code Intent — main finding
+3. Scope Creep — main finding (or note if skipped / insufficient task)
+4. Project Recovery — main finding and recommendation
+5. Important risks
+6. Recommended next actions (bullets)
+7. Final recommendation
 
-Be evidence-based. Do not invent facts.
-If evidence is insufficient, clearly mention it.
+Be evidence-based. Do not invent facts. If any agent lacked evidence, say so clearly.
 """
 
     return generate(prompt)
