@@ -3,9 +3,9 @@
     "repository": "aicar",
     "revision": "07b121617c2a064e5e16c43db73a4ee852de864c",
     "annotation": {
-      "status": "pending",
-      "annotator": null,
-      "rationale": null
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit migrates intent analysis from OpenAI to Google GenAI and adds a local fallback when Gemini analysis is disabled. Lines 1–30 of backend/agents/intent_agent.py show the provider switch and fallback based on the commit message and changed-file list; see commit 07b121617c2a064e5e16c43db73a4ee852de864c."
     },
     "case_id": "aicar_intent_07b121617c2a",
     "file": "backend/agents/intent_agent.py",
@@ -13,18 +13,22 @@
       1,
       30
     ],
-    "gold_intent": null,
-    "accepted_intents": [],
-    "introducing_commit": null,
-    "supporting_commits": []
+    "gold_intent": "Migrate intent analysis from OpenAI to Gemini and provide a low-confidence local fallback when Gemini analysis is disabled.",
+    "accepted_intents": [
+      "Migrate intent analysis from OpenAI to Gemini and provide a low-confidence local fallback when Gemini analysis is disabled."
+    ],
+    "introducing_commit": "07b121617c2a064e5e16c43db73a4ee852de864c",
+    "supporting_commits": [
+      "07b121617c2a064e5e16c43db73a4ee852de864c"
+    ]
   },
   {
     "repository": "aicar",
     "revision": "df3ad517cd35b3608ac2fe01de16b5dabc172221",
     "annotation": {
-      "status": "pending",
-      "annotator": null,
-      "rationale": null
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted intent reviewed and confirmed by the annotator: “The proposed label accurately captures the backend initialization, database-session lifecycle, and imported components used by the API routes. No changes needed.” Evidence: backend/main.py lines 1–30 are attributed by Git blame to initial commit 1e253587774cc4063533fe62311f2c7d2a9816a3, which adds the database session generator and imports the FastAPI request models, repository services, agents, workflow, and CORS middleware. The case revision commit df3ad517cd35b3608ac2fe01de16b5dabc172221 does not introduce this region."
     },
     "case_id": "aicar_intent_df3ad517cd35",
     "file": "backend/main.py",
@@ -32,18 +36,22 @@
       1,
       30
     ],
-    "gold_intent": null,
-    "accepted_intents": [],
-    "introducing_commit": null,
-    "supporting_commits": []
+    "gold_intent": "Set up the FastAPI backend module by defining database-session handling and importing the request models, repository-analysis services, specialized agents, and workflow used by API routes.",
+    "accepted_intents": [
+      "Set up the FastAPI backend module by defining database-session handling and importing the request models, repository-analysis services, specialized agents, and workflow used by API routes."
+    ],
+    "introducing_commit": "1e253587774cc4063533fe62311f2c7d2a9816a3",
+    "supporting_commits": [
+      "1e253587774cc4063533fe62311f2c7d2a9816a3"
+    ]
   },
   {
     "repository": "aicar",
     "revision": "1e253587774cc4063533fe62311f2c7d2a9816a3",
     "annotation": {
-      "status": "pending",
-      "annotator": null,
-      "rationale": null
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted intent reviewed and confirmed by the annotator: “It accurately explains how the intent-analysis agent uses the OpenAI API to analyze commit messages, code diffs, changed files, and file history to infer the purpose of a code change. The structured JSON output with supporting evidence and confidence makes the analysis traceable. No changes needed.” Evidence: backend/agents/intent_agent.py lines 1–30 configure an OpenAI client and construct a prompt requesting intent reconstruction from commit and file-history evidence. Git blame attributes the region to initial commit 1e253587774cc4063533fe62311f2c7d2a9816a3."
     },
     "case_id": "aicar_intent_1e253587774c",
     "file": "backend/agents/intent_agent.py",
@@ -51,9 +59,524 @@
       1,
       30
     ],
+    "gold_intent": "Create an evidence-based intent-analysis agent that uses the OpenAI API to infer why a code change exists from commit and file-history evidence, returning a structured explanation with citations and confidence.",
+    "accepted_intents": [
+      "Create an evidence-based intent-analysis agent that uses the OpenAI API to infer why a code change exists from commit and file-history evidence, returning a structured explanation with citations and confidence."
+    ],
+    "introducing_commit": "1e253587774cc4063533fe62311f2c7d2a9816a3",
+    "supporting_commits": [
+      "1e253587774cc4063533fe62311f2c7d2a9816a3"
+    ]
+  },
+  {
+    "repository": "autoresearch",
+    "revision": "ebf357841b7358ae106b2f7ac378f9ec97b975f6",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted intent reviewed and confirmed by the annotator: “Importing Python's math module enables explicit NaN detection in the training loop, preventing invalid loss values from bypassing the existing fast-fail condition. The explanation correctly connects the code change to the bug identified in the parent commit.” Evidence: train.py line 12 adds the math import; the same commit changes the training guard to detect NaN loss and values above 100. Parent commit b5ba8ac00d64d38fd5b69714fe398b61c56d8160 explains that NaN comparisons made the prior guard miss invalid loss and waste the experiment time budget. Commit ebf357841b7358ae106b2f7ac378f9ec97b975f6 introduces the import."
+    },
+    "case_id": "autoresearch_intent_ebf357841b73",
+    "file": "train.py",
+    "region": [
+      12,
+      12
+    ],
+    "gold_intent": "Import Python's math module so the training loop can explicitly detect NaN loss values and fail fast, alongside the existing threshold check for exploding loss.",
+    "accepted_intents": [
+      "Import Python's math module so the training loop can explicitly detect NaN loss values and fail fast, alongside the existing threshold check for exploding loss."
+    ],
+    "introducing_commit": "ebf357841b7358ae106b2f7ac378f9ec97b975f6",
+    "introducing_commit_candidates": [
+      "ebf357841b7358ae106b2f7ac378f9ec97b975f6"
+    ],
+    "supporting_commits": [
+      "ebf357841b7358ae106b2f7ac378f9ec97b975f6",
+      "b5ba8ac00d64d38fd5b69714fe398b61c56d8160"
+    ]
+  },
+  {
+    "repository": "autoresearch",
+    "revision": "09ebea439db47bf08f925fc1654dc30415a58c64",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted intent reviewed and confirmed by the annotator. The annotator states that the empty-shard check ensures valid training data exists before the loop and raises a clear error immediately when none is available, avoiding an endless loop or wasted resources. Evidence: prepare.py line 261 adds the assertion after filtering out the validation shard; the parent commit c12eef778edafc89cd7ce036a7f500ddb5397a65 has a while True loop over parquet_paths without checking that the training list remains nonempty. Commit 09ebea439db47bf08f925fc1654dc30415a58c64 introduces the guard."
+    },
+    "case_id": "autoresearch_intent_09ebea439db4",
+    "file": "prepare.py",
+    "region": [
+      261,
+      261
+    ],
+    "gold_intent": "Fail fast with a clear error when no training data shards are available, preventing the training data loader from looping indefinitely over an empty shard list.",
+    "accepted_intents": [
+      "Fail fast with a clear error when no training data shards are available, preventing the training data loader from looping indefinitely over an empty shard list."
+    ],
+    "introducing_commit": "09ebea439db47bf08f925fc1654dc30415a58c64",
+    "introducing_commit_candidates": [
+      "09ebea439db47bf08f925fc1654dc30415a58c64"
+    ],
+    "supporting_commits": [
+      "09ebea439db47bf08f925fc1654dc30415a58c64",
+      "c12eef778edafc89cd7ce036a7f500ddb5397a65"
+    ]
+  },
+  {
+    "repository": "autoresearch",
+    "revision": "b5ba8ac00d64d38fd5b69714fe398b61c56d8160",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted intent reviewed and confirmed by the annotator. The annotator notes that comparisons involving NaN return false, so the former train_loss_f > 100 check missed NaN; changing it to not train_loss_f <= 100 catches both NaN and values above 100 and avoids wasting experiment time. Evidence: train.py lines 568–569 change the fast-fail condition and its comment. Commit b5ba8ac00d64d38fd5b69714fe398b61c56d8160 introduces the change and documents the failure mode."
+    },
+    "case_id": "autoresearch_intent_b5ba8ac00d64",
+    "file": "train.py",
+    "region": [
+      568,
+      569
+    ],
+    "gold_intent": "Make the training loop fail fast when loss exceeds 100 or is NaN, fixing a check that previously let NaN loss pass and waste the experiment time budget.",
+    "accepted_intents": [
+      "Make the training loop fail fast when loss exceeds 100 or is NaN, fixing a check that previously let NaN loss pass and waste the experiment time budget."
+    ],
+    "introducing_commit": "b5ba8ac00d64d38fd5b69714fe398b61c56d8160",
+    "introducing_commit_candidates": [
+      "b5ba8ac00d64d38fd5b69714fe398b61c56d8160"
+    ],
+    "supporting_commits": [
+      "b5ba8ac00d64d38fd5b69714fe398b61c56d8160"
+    ]
+  },
+  {
+    "repository": "codex_plugin_cc",
+    "revision": "430e2a8630f973382d10e336f2a64b611c84f9f3",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit adds the protocol type imports `ExternalAgentConfigImportParams` and `ExternalAgentConfigImportResponse`, and the method map entry `\"externalAgentConfig/import\"`. This is the protocol wiring needed for Claude session transfer: the plugin imports the app-server contract so it can pass an external agent configuration to Codex and resume a thread with the transferred session. The rationale is supported by the feature title, the file-level diff, and the commit message `feat: add Claude session transfer command (#374)`."
+    },
+    "case_id": "codex_plugin_cc_intent_430e2a8630f9",
+    "file": "plugins/codex/scripts/lib/app-server-protocol.d.ts",
+    "region": [
+      9,
+      10
+    ],
+    "gold_intent": "Add the protocol typing needed to import an external agent session into the Codex app-server, enabling Claude-to-Codex session transfer and resumable thread creation.",
+    "accepted_intents": [
+      "Add the protocol typing needed to import an external agent session into the Codex app-server, enabling Claude-to-Codex session transfer and resumable thread creation."
+    ],
+    "introducing_commit": "430e2a8630f973382d10e336f2a64b611c84f9f3",
+    "introducing_commit_candidates": [
+      "430e2a8630f973382d10e336f2a64b611c84f9f3"
+    ],
+    "supporting_commits": [
+      "430e2a8630f973382d10e336f2a64b611c84f9f3"
+    ]
+  },
+  {
+    "repository": "codex_plugin_cc",
+    "revision": "62c351a7bfeb71024c21d3240a9abc8dcb6471df",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit adds `reuseExistingBroker?: boolean` to `CodexAppServerClientOptions`, and the commit title states: `Use app-server auth status for Codex readiness (#177)`. This is consistent with reusing the current app-server/broker instance for readiness and auth checks instead of spinning up a separate broker. The change is narrowly scoped to client configuration and matches the project goal described in the commit message."
+    },
+    "case_id": "codex_plugin_cc_intent_62c351a7bfeb",
+    "file": "plugins/codex/scripts/lib/app-server-protocol.d.ts",
+    "region": [
+      54,
+      54
+    ],
+    "gold_intent": "Add an app-server client option that reuses an existing broker connection so Codex readiness and auth checks can use the current app server instead of creating a new broker instance.",
+    "accepted_intents": [
+      "Add an app-server client option that reuses an existing broker connection so Codex readiness and auth checks can use the current app server instead of creating a new broker instance."
+    ],
+    "introducing_commit": "62c351a7bfeb71024c21d3240a9abc8dcb6471df",
+    "introducing_commit_candidates": [
+      "62c351a7bfeb71024c21d3240a9abc8dcb6471df"
+    ],
+    "supporting_commits": [
+      "62c351a7bfeb71024c21d3240a9abc8dcb6471df"
+    ]
+  },
+  {
+    "repository": "codex_plugin_cc",
+    "revision": "c69527eb18d0bdab92080487708381f95cf4c291",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The selected lines import generated Codex app-server protocol types from the v1 and v2 type modules. The rest of the newly created file uses these imports to define the typed app-server method map, request/response types, and notification handler. The initial commit and README establish that this client supports the Claude Code plugin's Codex review and task-delegation workflows."
+    },
+    "case_id": "codex_plugin_cc_intent_c69527eb18d0",
+    "file": "plugins/codex/scripts/lib/app-server-protocol.d.ts",
+    "region": [
+      1,
+      30
+    ],
+    "gold_intent": "Import the generated Codex app-server protocol types needed to define a typed client interface for initialization, thread operations, reviews, turns, and notifications, supporting the Claude Code plugin's Codex review and task-delegation workflows.",
+    "accepted_intents": [
+      "Import the generated Codex app-server protocol types needed to define a typed client interface for initialization, thread operations, reviews, turns, and notifications, supporting the Claude Code plugin's Codex review and task-delegation workflows."
+    ],
+    "introducing_commit": "c69527eb18d0bdab92080487708381f95cf4c291",
+    "introducing_commit_candidates": [
+      "c69527eb18d0bdab92080487708381f95cf4c291"
+    ],
+    "supporting_commits": [
+      "c69527eb18d0bdab92080487708381f95cf4c291"
+    ]
+  },
+  {
+    "repository": "spank",
+    "revision": "17169e858cd645f7ee7264a7c9b2473298ad81aa",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit adds `speakerSampleRate` to preserve the rate used to initialize the audio speaker. Its description explains that custom sound packs may contain files with different sample rates; without resampling each later stream to the speaker's fixed rate, playback can have incorrect speed or pitch. The same commit uses this stored rate as the target when resampling and folds in the optional speed adjustment."
+    },
+    "case_id": "spank_intent_17169e858cd6",
+    "file": "main.go",
+    "region": [
+      473,
+      478
+    ],
+    "gold_intent": "Remember the speaker's initialization sample rate so each audio stream can be resampled to that fixed rate, preventing custom-pack sounds with mixed sample rates from playing at the wrong speed or pitch.",
+    "accepted_intents": [
+      "Remember the speaker's initialization sample rate so each audio stream can be resampled to that fixed rate, preventing custom-pack sounds with mixed sample rates from playing at the wrong speed or pitch."
+    ],
+    "introducing_commit": "17169e858cd645f7ee7264a7c9b2473298ad81aa",
+    "introducing_commit_candidates": [
+      "17169e858cd645f7ee7264a7c9b2473298ad81aa"
+    ],
+    "supporting_commits": [
+      "17169e858cd645f7ee7264a7c9b2473298ad81aa"
+    ]
+  },
+  {
+    "repository": "spank",
+    "revision": "6cb0a739865d6dad674a60de3c3569e964719a71",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit embeds the lizard audio files, adds a `--lizard` mode, and routes that mode to a lizard sound pack with escalating playback intensity. The commit message identifies the feature as adding a lizard sound from the Tom the Lizard meme."
+    },
+    "case_id": "spank_intent_6cb0a739865d",
+    "file": "main.go",
+    "region": [
+      46,
+      48
+    ],
+    "gold_intent": "Add a lizard audio mode by embedding the lizard sound files and exposing an exclusive `--lizard` option with escalating playback intensity.",
+    "accepted_intents": [
+      "Add a lizard audio mode by embedding the lizard sound files and exposing an exclusive `--lizard` option with escalating playback intensity."
+    ],
+    "introducing_commit": "6cb0a739865d6dad674a60de3c3569e964719a71",
+    "introducing_commit_candidates": [
+      "6cb0a739865d6dad674a60de3c3569e964719a71"
+    ],
+    "supporting_commits": [
+      "6cb0a739865d6dad674a60de3c3569e964719a71"
+    ]
+  },
+  {
+    "repository": "spank",
+    "revision": "dbde6a2172647a67bb75de57729336841d9fa493",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit changes the detection loop to read the mutable `cooldownMs` and `minAmplitude` values instead of the original startup tuning fields. These globals are updated by the stdio `set` command, so the change makes runtime amplitude and cooldown updates take effect in slap detection without restarting the application."
+    },
+    "case_id": "spank_intent_dbde6a217264",
+    "file": "main.go",
+    "region": [
+      430,
+      430
+    ],
+    "gold_intent": "Make runtime amplitude and cooldown settings from the stdio `set` command affect slap detection by applying the mutable threshold and cooldown values inside the detection loop.",
+    "accepted_intents": [
+      "Make runtime amplitude and cooldown settings from the stdio `set` command affect slap detection by applying the mutable threshold and cooldown values inside the detection loop."
+    ],
+    "introducing_commit": "dbde6a2172647a67bb75de57729336841d9fa493",
+    "introducing_commit_candidates": [
+      "dbde6a2172647a67bb75de57729336841d9fa493"
+    ],
+    "supporting_commits": [
+      "dbde6a2172647a67bb75de57729336841d9fa493"
+    ]
+  },
+  {
+    "repository": "capsule_identity",
+    "revision": "0d21e35cf05bbde6034009ba352bcd13968996b2",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit changes `IdentityBuilder` to a stateful capsule so identity updates made by `save_identity` persist through capsule key-value storage. The commit also refactors prompt assembly behind a testable loader and adds tests covering onboarding, saved identity, and restoring identity from the spark file."
+    },
+    "case_id": "capsule_identity_intent_0d21e35cf05b",
+    "file": "src/lib.rs",
+    "region": [
+      135,
+      135
+    ],
+    "gold_intent": "Make the identity capsule stateful so identity changes persist through capsule key-value storage, while preserving prompt construction and recovery behavior.",
+    "accepted_intents": [
+      "Make the identity capsule stateful so identity changes persist through capsule key-value storage, while preserving prompt construction and recovery behavior."
+    ],
+    "introducing_commit": "0d21e35cf05bbde6034009ba352bcd13968996b2",
+    "introducing_commit_candidates": [
+      "0d21e35cf05bbde6034009ba352bcd13968996b2"
+    ],
+    "supporting_commits": [
+      "0d21e35cf05bbde6034009ba352bcd13968996b2"
+    ]
+  },
+  {
+    "repository": "capsule_identity",
+    "revision": "81525a24d8d5c30c9ebc117c475d3d001a3ea588",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. As part of the `astrid-sdk` 0.6.0 migration, the spark-config parse-failure branch switches to the typed `log::warn(...)` API. It preserves the diagnostic message and parse error details."
+    },
+    "case_id": "capsule_identity_intent_81525a24d8d5",
+    "file": "src/lib.rs",
+    "region": [
+      165,
+      167
+    ],
+    "gold_intent": "Update spark-config parse-failure logging to the SDK 0.6 typed `log::warn` API as part of the SDK migration, preserving the diagnostic message.",
+    "accepted_intents": [
+      "Update spark-config parse-failure logging to the SDK 0.6 typed `log::warn` API as part of the SDK migration, preserving the diagnostic message."
+    ],
+    "introducing_commit": "81525a24d8d5c30c9ebc117c475d3d001a3ea588",
+    "introducing_commit_candidates": [
+      "81525a24d8d5c30c9ebc117c475d3d001a3ea588"
+    ],
+    "supporting_commits": [
+      "81525a24d8d5c30c9ebc117c475d3d001a3ea588"
+    ]
+  },
+  {
+    "repository": "capsule_identity",
+    "revision": "3d710b18928bc2018def5a644144b0722376714d",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The onboarding prompt now directs the LLM to call `save_identity`. The tool updates the in-memory identity, marks onboarding complete, and persists the chosen identity in capsule KV state and `spark.toml`, so it survives KV resets."
+    },
+    "case_id": "capsule_identity_intent_3d710b18928b",
+    "file": "src/lib.rs",
+    "region": [
+      36,
+      36
+    ],
+    "gold_intent": "Add a `save_identity` tool for the LLM to persist the identity chosen during onboarding, marking onboarding complete and saving it to immediate KV state and `spark.toml` for durability.",
+    "accepted_intents": [
+      "Add a `save_identity` tool for the LLM to persist the identity chosen during onboarding, marking onboarding complete and saving it to immediate KV state and `spark.toml` for durability."
+    ],
+    "introducing_commit": "3d710b18928bc2018def5a644144b0722376714d",
+    "introducing_commit_candidates": [
+      "3d710b18928bc2018def5a644144b0722376714d"
+    ],
+    "supporting_commits": [
+      "3d710b18928bc2018def5a644144b0722376714d"
+    ]
+  },
+  {
+    "repository": "tinyhttpd",
+    "revision": "363b985b86118289691e41d9ebcffdd11be67025",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit restores the correct `serve_file` spelling after a previous rename introduced the `sever_file` typo. It consistently updates the function declaration, implementation, and call site without changing file-serving behavior."
+    },
+    "case_id": "tinyhttpd_intent_363b985b8611",
+    "file": "httpd.c",
+    "region": [
+      46,
+      46
+    ],
+    "gold_intent": "Correct the file-serving function name from the accidental `sever_file` typo back to `serve_file` across its declaration, call site, and implementation.",
+    "accepted_intents": [
+      "Correct the file-serving function name from the accidental `sever_file` typo back to `serve_file` across its declaration, call site, and implementation."
+    ],
+    "introducing_commit": "363b985b86118289691e41d9ebcffdd11be67025",
+    "introducing_commit_candidates": [
+      "363b985b86118289691e41d9ebcffdd11be67025"
+    ],
+    "supporting_commits": [
+      "363b985b86118289691e41d9ebcffdd11be67025"
+    ]
+  },
+  {
+    "repository": "tinyhttpd",
+    "revision": "9a7081cd253fc8404ee326f1763112e688d07edc",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit consistently renames `serve_file` to `sever_file` in the declaration, call site, and implementation. The subsequent case 16 commit explicitly reverts the change, confirming this was an accidental naming typo rather than an intended functional improvement."
+    },
+    "case_id": "tinyhttpd_intent_9a7081cd253f",
+    "file": "httpd.c",
+    "region": [
+      46,
+      46
+    ],
+    "gold_intent": "Rename the file-serving function from `serve_file` to `sever_file` consistently across its declaration, call site, and implementation, although the subsequent revert indicates this was an accidental typo.",
+    "accepted_intents": [
+      "Rename the file-serving function from `serve_file` to `sever_file` consistently across its declaration, call site, and implementation, although the subsequent revert indicates this was an accidental typo."
+    ],
+    "introducing_commit": "9a7081cd253fc8404ee326f1763112e688d07edc",
+    "introducing_commit_candidates": [
+      "9a7081cd253fc8404ee326f1763112e688d07edc"
+    ],
+    "supporting_commits": [
+      "9a7081cd253fc8404ee326f1763112e688d07edc",
+      "363b985b86118289691e41d9ebcffdd11be67025"
+    ]
+  },
+  {
+    "repository": "java8_tutorial",
+    "revision": "f2d7b5b2ccf0ebd132cbcf162156706788e28cc3",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The case's introducing commit candidate is `4b92b43d53298652446651f94254341614c7873f`, which adds `HttpClientExamples.java`. The selected region begins the `syncRequest()` method, demonstrating how to build a synchronous GET request to `https://winterbe.com`, send it with Java 11 `HttpClient`, and print the response body. The later case revision `f2d7b5b2ccf0ebd132cbcf162156706788e28cc3` only reorders client initialization and is not the introducing commit for this example."
+    },
+    "case_id": "java8_tutorial_intent_f2d7b5b2ccf0",
+    "file": "src/com/winterbe/java11/HttpClientExamples.java",
+    "region": [
+      20,
+      20
+    ],
+    "gold_intent": "Add a Java 11 synchronous HTTP GET example that builds a request for `https://winterbe.com`, sends it with `HttpClient`, and prints the response body.",
+    "accepted_intents": [
+      "Add a Java 11 synchronous HTTP GET example that builds a request for `https://winterbe.com`, sends it with `HttpClient`, and prints the response body."
+    ],
+    "introducing_commit": "4b92b43d53298652446651f94254341614c7873f",
+    "introducing_commit_candidates": [
+      "4b92b43d53298652446651f94254341614c7873f"
+    ],
+    "supporting_commits": [
+      "4b92b43d53298652446651f94254341614c7873f"
+    ]
+  },
+  {
+    "repository": "java8_tutorial",
+    "revision": "4b92b43d53298652446651f94254341614c7873f",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The introducing commit creates `HttpClientExamples.java`, adding its imports, runnable entry point, and synchronous GET example that builds a request for `https://winterbe.com`, sends it via Java 11 `HttpClient`, and prints the response body. The label is scoped to the selected lines and does not attribute the later asynchronous, POST, or basic-auth examples to this region."
+    },
+    "case_id": "java8_tutorial_intent_4b92b43d5329",
+    "file": "src/com/winterbe/java11/HttpClientExamples.java",
+    "region": [
+      1,
+      30
+    ],
+    "gold_intent": "Introduce a Java 11 `HttpClient` examples class, including the imports, runnable entry point, and a synchronous GET request example that prints the response body.",
+    "accepted_intents": [
+      "Introduce a Java 11 `HttpClient` examples class, including the imports, runnable entry point, and a synchronous GET request example that prints the response body."
+    ],
+    "introducing_commit": "4b92b43d53298652446651f94254341614c7873f",
+    "introducing_commit_candidates": [
+      "4b92b43d53298652446651f94254341614c7873f"
+    ],
+    "supporting_commits": [
+      "4b92b43d53298652446651f94254341614c7873f"
+    ]
+  },
+  {
+    "repository": "simple_cache",
+    "revision": "dd145de984c0120833237e3913bf1fb3ec7f6dc7",
+    "annotation": {
+      "status": "labelled",
+      "annotator": "kanam Ramu",
+      "rationale": "AI-assisted annotation reviewed and confirmed by the annotator. The commit changes `CacheException` from a plain interface to one extending PHP's built-in `\\Throwable`, aligning implementing exceptions with PHP's throwable contract so they can be thrown and caught as exceptions."
+    },
+    "case_id": "simple_cache_intent_dd145de984c0",
+    "file": "src/CacheException.php",
+    "region": [
+      8,
+      8
+    ],
+    "gold_intent": "Make the PSR Simple Cache `CacheException` interface extend PHP's `\\Throwable` so implementing exceptions satisfy PHP's throwable contract.",
+    "accepted_intents": [
+      "Make the PSR Simple Cache `CacheException` interface extend PHP's `\\Throwable` so implementing exceptions satisfy PHP's throwable contract."
+    ],
+    "introducing_commit": "dd145de984c0120833237e3913bf1fb3ec7f6dc7",
+    "introducing_commit_candidates": [
+      "dd145de984c0120833237e3913bf1fb3ec7f6dc7"
+    ],
+    "supporting_commits": [
+      "dd145de984c0120833237e3913bf1fb3ec7f6dc7"
+    ]
+  },
+  {
+    "repository": "simple_cache",
+    "revision": "19a4d7c04df3b8e1bc7f68d7913221c6d731f89e",
+    "annotation": {
+      "status": "pending",
+      "annotator": null,
+      "rationale": null
+    },
+    "case_id": "simple_cache_intent_19a4d7c04df3",
+    "file": "src/CacheInterface.php",
+    "region": [
+      18,
+      18
+    ],
     "gold_intent": null,
     "accepted_intents": [],
     "introducing_commit": null,
+    "introducing_commit_candidates": [
+      "19a4d7c04df3b8e1bc7f68d7913221c6d731f89e"
+    ],
+    "supporting_commits": []
+  },
+  {
+    "repository": "synx",
+    "revision": "3cf85cc33fee8e40f9e18c2ba34eef1b92f8317f",
+    "annotation": {
+      "status": "pending",
+      "annotator": null,
+      "rationale": null
+    },
+    "case_id": "synx_intent_3cf85cc33fee",
+    "file": "lib/synx/version.rb",
+    "region": [
+      2,
+      2
+    ],
+    "gold_intent": null,
+    "accepted_intents": [],
+    "introducing_commit": null,
+    "introducing_commit_candidates": [
+      "3cf85cc33fee8e40f9e18c2ba34eef1b92f8317f"
+    ],
+    "supporting_commits": []
+  },
+  {
+    "repository": "synx",
+    "revision": "9efde0115e824442f0d65651c58429a3f025d633",
+    "annotation": {
+      "status": "pending",
+      "annotator": null,
+      "rationale": null
+    },
+    "case_id": "synx_intent_9efde0115e82",
+    "file": "lib/synx/project.rb",
+    "region": [
+      24,
+      24
+    ],
+    "gold_intent": null,
+    "accepted_intents": [],
+    "introducing_commit": null,
+    "introducing_commit_candidates": [
+      "9efde0115e824442f0d65651c58429a3f025d633"
+    ],
     "supporting_commits": []
   }
 ]
